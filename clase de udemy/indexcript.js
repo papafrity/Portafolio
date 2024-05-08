@@ -1,6 +1,3 @@
-// prueba para ver si se clono bien
-
-
 // ejemplos de como usar las condicionales en javascript
 
 const billetera = 999;
