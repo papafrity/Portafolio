@@ -65,11 +65,13 @@ class    Persona{
 const personaMike = new Persona('Michael', 'Ramirez');
 personaMike.saludar();
 
-// ejemplo de promise o promesa (sirve para dar un valor que podria o no podria estar o existir, y luego se le agrega un if else para que reaccione al valor que tiene o que no llega a tener)
+// ejemplo de promise o promesa (sirve para dar un valor que podria o no podria estar o existir, y luego se le agrega un 
+// if else para que reaccione al valor que tiene o que no llega a tener)
 // en los Promises existen 3 valores
-// Pending : No se ha cumplido pero tampoco se ha rechazado ( te sale cuando no hay codigo que resolver como el if else no existiera)
-// Fulfilled : Ya se cumplio
-// Rejected :  Se ha rechazado o no se pudo cumplir
+// 
+//      Pending : No se ha cumplido pero tampoco se ha rechazado ( te sale cuando no hay codigo que resolver como el if else no existiera)
+//      Fulfilled : Ya se cumplio
+//      Rejected :  Se ha rechazado o no se pudo cumplir
 const usuarioAutenticado = new Promise((resolve, reject) => {
     const auth = true;
 
@@ -118,7 +120,8 @@ usuarioAutenticado
 .then((resultado)=>console.log(resultado))    
 .catch((error)=>console.log(error)) //mas corto con el mismo resultado
 
-// clase 140 notificación API (boton)
+// clase 140 notificación API (boton)----------------------------------------------------------
+// 
 // es mejor poner un const boton = document.queryselector por que cuando tenes muchos se te hace dificil mantenerlos y de esta forma es mas facil que solo poner document.querySelector sin el const boton
 // este ejemplo es el que auto relleno la maquina IA integrada
 const botonn = document.querySelector( "#boton" ).addEventListener( "click   ", () =>{
@@ -145,3 +148,133 @@ boton2.addEventListener("click", ()=>{
     // tambien se puede  hacer de esta manera
     // .then(resultado => console.log("El resultado es ${resultado}"));   //(sacar el comentario para ver acción)
 })
+
+// clase 141 async / await---------------------------------------------------------------------
+// async / await es una forma de escribir codigo asincrono de forma mas limpia, si se usa async es obligatorio poner await
+//  --poner delante de la funcion async esta diciendo que la funcion se va a resolver sin importar el orden
+//  --poner await significa que la funcion esperara a que se ejecute el await antes de ejecutar lo que sigue
+//  --await sirve para bloquear la ejecucion cuando tenes mas de un llamado de una funcion, por que esta la 
+// opcion de no poner await y que se ejecuten las dos al mismo tiempo, pero si quieres que se ejecute una 
+// primero y vaya por partes ahi si agrega un await a cada funcion que queres que espere.
+//  Async / Await
+
+function descargarNuevosClientes() {
+    return new Promise( (resolve) => {
+        console.log('Descargarndo clientes... espere...');
+            // existe "setInterval" que repite y ejecuta la funcion fijando un temporalizador
+        setTimeout( () => {   // setTimeout es un temporlizador para ejecutar o terminar de ejecutar una funcion
+            resolve('Clientes descargados');
+        }, 5000 );   // el tiempo se pone en milisegundos por lo que 1000 seran un segundo
+
+    });
+
+
+}
+
+async function app() {
+    try {    // try significa que lo intentara una vez si o si
+        const resultado = await descargarNuevosClientes();
+        console.log(resultado);
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+
+app();
+
+
+// como resultado final quedara asi:
+// descargando clientes... espere... 
+// este codigo no se bloquea (este mensaje saldra instantaneamente, sin esperar los 5 segundos)
+// Los clientes fueron descargados (este mensaje saldra despues de 5 segundos)
+
+// vamos a repetir la ultima parte con un cambio del console.log dentro del try
+
+async function app() {
+    try {    // try significa que lo intentara una vez si o si
+        const resultado = await descargarNuevosClientes();
+        console.log ('este código si se bloquea se bloquea')
+        console.log(resultado);
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+
+app();
+
+
+// como resultado final quedara asi:
+// descargando clientes... espere...
+// Este código si se bloquea (aparecera luego de 5 segundos con el codigo de abajo)
+// Los clientes fueron descargados (aparece en conjunto con el de arriba)
+
+// clase 142 como trabajar con dos consultas async await?------------------------------------------------------------------------
+
+//  --await sirve para bloquear la ejecucion cuando tenes mas de un llamado de una funcion, por que esta la 
+// opcion de no poner await y que se ejecuten las dos al mismo tiempo, pero si quieres que se ejecute una 
+// primero y vaya por partes ahi si agrega un await a cada funcion que queres que espere.
+
+// ejemplo:
+
+function descargarNuevosClientes() {
+    return new Promise( (resolve) => {
+        console.log('Descargarndo clientes... espere...');
+            // existe "setInterval" que repite y ejecuta la funcion fijando un temporalizador
+        setTimeout( () => {   // setTimeout es un temporlizador para ejecutar o terminar de ejecutar una funcion
+            resolve('Clientes descargados');
+        }, 5000 );   // el tiempo se pone en milisegundos por lo que 1000 seran un segundo
+
+    });
+
+}
+
+function descargarUltimosPedidos() {
+    return new Promise( resolve => {
+        console.log ('descargando pedidos... espere...');
+
+        setTimeout( () => {
+            resolve('Pedidos descargados');
+        }, 3000  );
+    })
+}
+
+async function app() {
+    try {    // try significa que lo intentara una vez si o si
+        const clientes = await descargarNuevosClientes();  // si ponemos await en los dos, ambos esperaran para ejecutarse
+        const pedidos = await descargarUltimosPedidos();  // y asi tardara el doble de tiempo
+        console.log(clientes);
+        console.log(pedidos);
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+
+// aremos otro ejemplo para solucionar eso, copiamos solo la ultima parte donde dice async
+
+async function app() {
+    try {    // try significa que lo intentara una vez si o si
+        // const clientes = await descargarNuevosClientes();
+        // const pedidos = await descargarUltimosPedidos();
+        // console.log(clientes);
+        // console.log(pedidos);
+
+        const resultado = await Promise.all([ descargarNuevosClientes(), descargarUltimosPedidos() ]);
+        // usando Promise.all crearemos un arreglo donde uniremos ambas funciones de clientes y pedidos, y haran que se ejecuten al mismo tiempo,
+        // colocaremos await porque es obligatorio ponerlo cuando usamos async
+
+        // ahora podemos colocar el console.log de "resultado"
+        console.log(resultado[0]); // se le agrega [] por que al ser un arreglo se convierte en una lista y puede cambiar el orden
+        console.log(resultado[1]);
+    } catch (error) {
+        console.log(error);
+    }
+// ¡¡NOTA IMPORTANTE!! te pueden pedir en una entrevista si sabes como hacer mas eficiente un llamado async / await
+// para eso se debe aprender el await Promise.all( [ blabla(), ponerLoQueHagaFalta() ])
+
+}
