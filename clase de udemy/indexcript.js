@@ -278,3 +278,45 @@ async function app() {
 // para eso se debe aprender el await Promise.all( [ blabla(), ponerLoQueHagaFalta() ])
 
 }
+
+// clase 143 "fetch api" ----------------------------------------------------------------------------------------------------
+// para conectar con una base de datos
+
+function obtenerEmpleados() {
+// el nombre del json es empleados, pero lo cambie a "clase143"
+    const archivo = 'clase143.json';
+//  paso a paso
+    fetch(archivo)// lo que hacemos aqui es fetch a este "archivo"
+    .then( resultado => {   // entonces el resultado va a ser un json, y lo va a retornar al siguiente .then "datos" 
+        return resultado.json();  // (pensara, clase de respuesta es esta, es un json o un texto) si le ponemos texto lo pondra en texto, si lo ponemos en json se vera mas ordenado y lo mostrara como si fuera un arreglo y le dara formato
+    })
+    .then( datos => {
+        console.log(datos);  // ahora si accedemos a los datos
+    })
+}
+obtenerEmpleados();
+
+// version resumida de arriba
+    fetch(archivo)
+    .then(  resultado => resultados.json())
+    .then( datos => { console.log(datos.clase143)  })  // se le agrega a "datos" un ".clase143" (empleados en el ejemplo del profe), de esta forma se pueden acceder a los datos
+
+    //    tambien se le puede agregar:-------- se le llama distructuring
+    const { clase143 } = datos;  // con lo cual se podria comentar la linea de "datos.clase143", con esto seria lo mismo
+    console.log(clase143)  // (empleados en el ejemplo del profe)
+
+    // en le proximo ejemplo se agregan los resultados de forma individual:
+    empleados.forEach( empleado => {
+        console.log(empleado); // esta opcion para mostrar todo
+
+    //  si queremos agregar una opcion individual para cada uno tendremos que ponerlo asi    
+        console.log(empleado.id);
+        console.log(empleado.nombre);
+        console.log(empleado.puesto);
+
+    // si queremos mostrarlo en el HTML haremos esto:
+        document.querySelector('.contenido')  // poniendo document hacemos referencia a todo el archivo o documento HTML, el querySelector es para seleccionar algo dentro del document
+        // en el HTML tenemos un div llamado contenido,peor se puede elegir cualquier nombre o selector
+        
+    })
+    
