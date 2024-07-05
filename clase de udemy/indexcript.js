@@ -314,9 +314,17 @@ obtenerEmpleados();
         console.log(empleado.nombre);
         console.log(empleado.puesto);
 
+    //existe otra forma de separar de la lista, y sean mas de uno, por ejemplo, "ID" y "Nombre" (no queremos profesion) 
+
     // si queremos mostrarlo en el HTML haremos esto:
         document.querySelector('.contenido')  // poniendo document hacemos referencia a todo el archivo o documento HTML, el querySelector es para seleccionar algo dentro del document
         // en el HTML tenemos un div llamado contenido,peor se puede elegir cualquier nombre o selector
+
+        // hay otras formas de poder mostrarlo en el HTML, una de ella es eligiendo solo un detalle de la lista, en este caso seria "nombre"
+        document.querySelector('.contenido').innerHTML = empleado.nombre;  // con esto se muestra el nombre, este es un ejemplo creado por la IA de vscode, Usa innerHTML cuando quieras agregar contenido que se convierta en un elemento DOM (por ejemplo, agregar un párrafo o una lista).
+        document.querySelector('.contenido').textContent = empleado.nombre;  //-- este tambien muestra el nombre, es ejemplo del profesor, Usa textContent cuando quieras cambiar el contenido de un nodo de texto existente sin interpretar etiquetas HTML. Tambien intercambia el texto ya escrito si tenia un "raul" con esto lo cambia a "pedro".
+        document.querySelector('.contenido').textContent += empleado.nombre;  // agregando el signo mas va a sumar el texto anterior que estaba escrito y le suma lo nuevo.
         
+
     })
     
