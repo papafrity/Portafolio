@@ -306,15 +306,36 @@ obtenerEmpleados();
     console.log(clase143)  // (empleados en el ejemplo del profe)
 
     // en le proximo ejemplo se agregan los resultados de forma individual:
-    empleados.forEach( empleado => {
-        console.log(empleado); // esta opcion para mostrar todo
+    empleados.forEach( empleado => {  // esta opcion para mostrar todo
+        console.log(empleado); // al poner "empleado" se mostrara todo lo que contenga el arreglo
 
-    //  si queremos agregar una opcion individual para cada uno tendremos que ponerlo asi    
+    //  si queremos agregar una opcion individual para cada uno tendremos que ponerlo asi; sin olvidar que hay que usar el -"empleados.forEach()"- 
         console.log(empleado.id);
         console.log(empleado.nombre);
         console.log(empleado.puesto);
 
-    //existe otra forma de separar de la lista, y sean mas de uno, por ejemplo, "ID" y "Nombre" (no queremos profesion) 
+    //existe otra forma de separar de la lista, y sean mas de uno, por ejemplo, "ID" y "Nombre" (no queremos profesion) al mismo tiempo:
+    // la tecnica se llama "distructuring"
+        const { empleados } = datos;  // si no tenemos nada creado, al poner empleados se crea automatico para poder ejecutarse
+        console.log(empleados);  // se usa lo que recien se creo, en este caso "empleados"
+
+    // este es un ejemplo de la IA para explicar mejor como funciona "distructuring":
+
+
+    // --------------------ejemplo de la IA----------------------
+    const persona = {
+        nombre: 'Juan',
+        edad: 30,
+        profesion: 'Desarrollador Web'
+    };
+    
+    // Usando destructuring para extraer propiedades específicas
+    const { nombre, edad } = persona;
+    
+    console.log(nombre); // Resultado: 'Juan'
+    console.log(edad); // Resultado: 30
+    // ----------------------------------------------------------
+
 
     // si queremos mostrarlo en el HTML haremos esto:
         document.querySelector('.contenido')  // poniendo document hacemos referencia a todo el archivo o documento HTML, el querySelector es para seleccionar algo dentro del document
@@ -326,5 +347,19 @@ obtenerEmpleados();
         document.querySelector('.contenido').textContent += empleado.nombre;  // agregando el signo mas va a sumar el texto anterior que estaba escrito y le suma lo nuevo.
         
 
+
     })
+        // hay una forma de hacer fetch usando menos codigo (async / await)
+        async function obtenerEmpleados() {  // de esta forma podemos hacer fetch con menos codigo y ademas con mas funciones, como usar el await para esperar que una funcion termine antes de continuar para que no se cometan errores
+            const archivo = 'empleados.json'
+            // para mostrar los datos, podemos hacerlo asi
+            const resultado = await fetch(archivo);
+            const datos = await resultado.json();
+            console.log(datos);
+        }
+        obtenerEmpleados(); 
+
+    // seccion 11: javascrip en el navegador y DOM Scripting--------------------------------------------------------
+    
+    // clase 144 "seleccionar elementos con query.selector"---------------------------------------------------------
     
