@@ -362,4 +362,29 @@ obtenerEmpleados();
     // seccion 11: javascrip en el navegador y DOM Scripting--------------------------------------------------------
     
     // clase 144 "seleccionar elementos con query.selector"---------------------------------------------------------
+    // tenemos 3 tipos de elegir o seleccionar los selectores, y sean ".clases" o "#ID"
+
+    // querySelector------
+    // querySelector te retorna 0 o 1 Elementos siempre
+    const heading = doccument.querySelector('h2')   //se crea la variable heading con el selector "h2"
+    console.log(heading);  // de esta forma se mostrara todos los "h2" que existan en la pagina
     
+    const heading2 = documnet.querySelector('.header__texto h2')  // de esta forma se seleccionara los "h2" solo dentro de la clase / div ".header__texto"
+    console.log(heading2);
+   
+    const heading3 = documnet.querySelector('#heading')  // de esta forma solo se seleccionaran el/los selectores de "ID"
+    console.log(heading3);
+        // si se quiere "CAMBIAR CONTENIDO EN EL HTML" se puede hacer de esta forma
+
+    heading.textContent = 'Nuevo Heading';  // lo que hace esto es seleccionar de la variable creada heading y tomar solo el textContent, y lo que se ponga luego del "=" sera lo que se cambie en el HTML
+    heading.classList.add('nueva-clase');  // esto le agregara una nueva clase a la variable "heading" que selecciona los "h2" como sale arriba en la primera, si ya contenia una clase, se le agregara otra, sino la creara y se lalmara "nueva-clase"
+    
+        // un punto a tener en cuenta es que como retorna solo 0 o 1 si hay muchos, por ejemplo, 3 "a (que son para links)" solo tomara el primero, y para eso tenemos el siguiente querySelector
+
+    // querySelectorAll-------
+
+
+
+    // getElementById
+
+
