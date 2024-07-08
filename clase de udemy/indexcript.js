@@ -383,7 +383,17 @@ obtenerEmpleados();
 
     // querySelectorAll-------
 
+    const enlaces = document.querySelectorAll('.navegacion a');  //esto va a seleccionar desde la clase padre "navegacion" todos los links "a", hay que recordar que los selectores son iguales a los de css las clases ".clases" y "#ID"
+    console.log(enlaces);
 
+        // se puede elegir un elemento en especial poniendo de esta forma
+    console.log(enlaces[0])
+
+        // de esta forma se puede cambiar las propiedades
+    enlaces[0].textContent = 'nuevo texto para enlace'
+
+        // hay otra forma mas corta de lograr lo primero, sacando la variable
+        document.querySelectorAll('.navegacion a')[0].textContent = 'nuevo texto para enlace'
 
     // getElementById
 
