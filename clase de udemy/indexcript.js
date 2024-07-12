@@ -393,7 +393,17 @@ obtenerEmpleados();
     enlaces[0].textContent = 'nuevo texto para enlace'
 
         // hay otra forma mas corta de lograr lo primero, sacando la variable
-        document.querySelectorAll('.navegacion a')[0].textContent = 'nuevo texto para enlace'
+    document.querySelectorAll('.navegacion a')[0].textContent = 'nuevo texto para enlace'
+
+        // para modificar el link se puede usar tal cual sale en el HTML "href"
+    enlaces[0].href = 'http://www.google.com';
+
+        // para agregar una nueva clase se puede hacer de esta forma
+    enlaces[0].classList.add('nueva-clase');
+
+        /* Entonces se puede modificar cada cosa dentro del HTML creando una variable que 
+         contenga el selector con "document.querySelector" o agregarle el "all" al final para elegir todas
+         luego de crear la variable en este caso "enlaces" se puede ocupar para elegir lo que se desea cambiar, ya sea "textContent" o "href" o "classList.add",etc. */
 
     // getElementById
 
